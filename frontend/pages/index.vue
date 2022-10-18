@@ -1,8 +1,5 @@
 <template>
-  <div>
-    <SearchBar stores="Blabla" />
-    <StoreList stores={{ storesDummy }} />
-  </div>
+  <App />
 </template>
 
 <script lang="ts">

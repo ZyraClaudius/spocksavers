@@ -1,6 +1,25 @@
-<script>
+<script lang="ts">
+import PropType from 'vue';
+
+type Store = {
+  id: string;
+  storeName: string;
+  postcode: string;
+  phoneNumber: string;
+}
+type SearchFunction = (stores: Store[]) => Store[];
+
+let searcher: SearchFunction;
+
+searcher = (stores) => {
+  
+  return stores
+}
+
 export default {
-  props: ['stores'],
+  props: {
+    callback: PropType<(searcher: SearchFunction) => Store[]>,
+  },
   data() {
     return {
     }
