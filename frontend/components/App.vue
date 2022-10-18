@@ -44,6 +44,7 @@ export default defineComponent({
 <template>
     <div>
         <SearchBar :callback="search"/>
+        <p>{{ storesDisplay }}</p>
         <!-- <StoreList stores={{ storesDummy }} /> -->
     </div>
 </template>

@@ -25,7 +25,14 @@ export default defineComponent({
       return stores.filter(this.storeFilter);
     },
     storeFilter(store: Store) {
-      
+      for(let key in store){
+        if(key=="id" || key=="storeName" || key=="postcode" || key=="phoneNumber"){
+          if(store[key].includes(this.searchTerm)){
+            return true;
+          }
+        }
+      }
+      return false;
     }
   }
 })
@@ -34,8 +41,6 @@ export default defineComponent({
 <template>
   <div id="searchRow">
     <input v-model="searchTerm" @input="onChange" type="text" maxlength="18" />
-    <p>{{ searchTerm }}</p>
-    <p>{{ counter }}</p>
   </div>
 </template>
 
