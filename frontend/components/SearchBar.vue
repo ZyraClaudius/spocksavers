@@ -1,35 +1,41 @@
 <script lang="ts">
-import PropType from 'vue';
+import type { PropType } from 'vue';
+import { defineComponent } from 'vue';
+import type { SearchFunction,Store } from './App.vue';
 
-type Store = {
-  id: string;
-  storeName: string;
-  postcode: string;
-  phoneNumber: string;
-}
-type SearchFunction = (stores: Store[]) => Store[];
+type Callback = (searcher: SearchFunction) => void;
 
-let searcher: SearchFunction;
-
-searcher = (stores) => {
-  
-  return stores
-}
-
-export default {
+export default defineComponent({
   props: {
-    callback: PropType<(searcher: SearchFunction) => Store[]>,
+    callback: { type: Function as PropType<Callback>, required: true},
   },
+
   data() {
     return {
+      searchTerm: "",
+      counter: 0,
+    }
+  },
+
+  methods: {
+    onChange(payload: Event) {
+      this.$props.callback(this.searcher);
+    },
+    searcher(stores: Store[]) {
+      return stores.filter(this.storeFilter);
+    },
+    storeFilter(store: Store) {
+      
     }
   }
-}
+})
 </script>
 
 <template>
   <div id="searchRow">
-    <input type="text" maxlength="18"/>
+    <input v-model="searchTerm" @input="onChange" type="text" maxlength="18" />
+    <p>{{ searchTerm }}</p>
+    <p>{{ counter }}</p>
   </div>
 </template>
 
