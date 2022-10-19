@@ -1,0 +1,32 @@
+a{
+    text-decoration: none;
+    display: inline-block;
+    border: 2px solid black;
+    color: black;
+    padding: 6px 10px;
+    font-size: inherit;
+    border-radius: 5px;
+}
+
+@keyframes hover {
+    from{
+        background-color: white;
+        color: black;
+        transform: scale(1);
+    }
+    to{
+        background-color: green;
+        color: white;
+        transform: scale(1.1);
+    }
+}
+
+a:hover {
+   background-color: green;
+   color: white;
+   transform: scale(1.1);
+   animation-name: hover;
+   animation-duration: 0.5s;
+}
+
+
