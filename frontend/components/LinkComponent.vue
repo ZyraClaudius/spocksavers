@@ -12,3 +12,6 @@ export default defineComponent({
 <template>
     <a :href="$props.href">{{ $props.label }}</a>
 </template>
+
+<style scoped src="../assets/css/linkComponent.css">
+</style>
