@@ -1,11 +1,16 @@
 <template>
-  <App/>
+  <App />
 </template>
 
 <script lang="ts">
 import Vue from 'vue'
+import App from '../components/App.vue';
 
-export default Vue.extend({
-  name: 'IndexPage'
-})
+export default {
+  components: { App },
+  head: {
+    title: 'SpockSavers'
+  },
+  name: 'IndexPage',
+}
 </script>

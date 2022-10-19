@@ -1,0 +1,18 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@300&display=swap');
+
+#searchRow {
+    display: flex;
+    justify-content: center;
+}
+
+input {
+    font-family: 'Roboto Mono';
+    margin-top: 20vh;
+    padding: 5px;
+    height: inherit;
+    background-image: url(../images/search_FILL0_wght400_GRAD0_opsz48.svg);
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position-x: right;
+}
+

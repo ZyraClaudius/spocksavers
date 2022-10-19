@@ -1,0 +1,18 @@
+.storeTile {
+    border: 3px solid black;
+    border-radius: 5px;
+    width: 300px;
+    padding: 5px;
+    margin-top: 5px;
+    flex-grow: 0;
+}
+
+.storeName {
+    font-size: 1.2em;
+}
+
+.storeInfo {
+    display: flex;
+    justify-content: space-between;
+    margin-left: 1.2em;
+}

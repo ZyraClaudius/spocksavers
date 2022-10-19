@@ -1,0 +1,8 @@
+.storeList {
+    margin-top: 10px;
+}
+
+.storeListContainer {
+    display: flex;
+    justify-content: center;
+}
