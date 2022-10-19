@@ -1,30 +1,28 @@
-<script>
-import { stringLiteral } from '@babel/types';
+<template>
+    <div class="storeTile">
+        <p class="storeName">{{ store.storeName }}</p>
+        <div class="storeInfo">
+            <p>{{ store.postcode }}</p>
+            <p>{{ store.phoneNumber }}</p>
+        </div>
+    </div>
+</template>
 
-export default {
+<script lang="ts">
+import { defineComponent } from 'vue';
+import type { PropType } from 'vue';
+import type { Store } from './App.vue';
+
+export default defineComponent({
     props: {
-        store: {
-            name: String,
-            postcode: String,
-            phone: Number,
-        }
+        store: {type: Object as PropType<Store>, required: true}
     },
     data() {
         return {
         }
     }
-}
+})
 </script>
-
-<template>
-    <div class="storeTile">
-        <p class="storeName">{{ store.name }}</p>
-        <div class="storeInfo">
-            <p>{{ store.postcode }}</p>
-            <p>{{ store.phone }}</p>
-        </div>
-    </div>
-</template>
 
 <style scoped src="../assets/css/storeTile.css">
 

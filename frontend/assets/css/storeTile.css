@@ -1,18 +1,18 @@
 .storeTile {
     border: 3px solid black;
     border-radius: 5px;
-    background-color: green;
-    color: white;
     width: 300px;
-    padding: 3px;
+    padding: 5px;
+    margin-top: 5px;
+    flex-grow: 0;
 }
 
 .storeName {
-    font-size: 1.5em;
+    font-size: 1.2em;
 }
 
 .storeInfo {
     display: flex;
     justify-content: space-between;
-    margin: 1em 1em 0 1em;
+    margin-left: 1.2em;
 }
