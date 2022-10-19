@@ -4,6 +4,7 @@
         <div class="storeInfo">
             <p>{{ store.postcode }}</p>
             <p>{{ store.phoneNumber }}</p>
+            <LinkComponent />
         </div>
     </div>
 </template>
@@ -12,6 +13,7 @@
 import { defineComponent } from 'vue';
 import type { PropType } from 'vue';
 import type { Store } from './App.vue';
+import LinkComponent from './LinkComponent.vue';
 
 export default defineComponent({
     props: {
@@ -20,7 +22,8 @@ export default defineComponent({
     data() {
         return {
         }
-    }
+    },
+    components: {LinkComponent}
 })
 </script>
 
