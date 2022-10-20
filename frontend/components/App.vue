@@ -13,13 +13,14 @@ export type Store = {
 
 export type SearchFunction = (stores: Store[]) => Store[];
 
-type DataType = { 
-    stores: Store[], 
-    storesDisplay: Store[] 
+type DataType = {
+    stores: Store[],
+    storesDisplay: Store[]
+    hasSearched: boolean
 };
 
 export default defineComponent({
-    components: {SearchBar, StoreList, Header},
+    components: { SearchBar, StoreList, Header },
 
     data(): DataType {
         return {
@@ -63,6 +64,7 @@ export default defineComponent({
 
             ],
             storesDisplay: [],
+            hasSearched: false,
         };
     },
 
@@ -75,6 +77,7 @@ export default defineComponent({
     methods: {
         updateStoresDisplay(stores: Store[]) {
             this.storesDisplay = stores;
+            this.hasSearched = true;
         }
     }
 
@@ -85,13 +88,24 @@ export default defineComponent({
 <template>
     <div>
         <Header />
-        <div v-if="storesLoaded">
-            <SearchBar :callback="updateStoresDisplay" :stores="stores" />
-            <StoreList :stores="storesDisplay" />
+        <div v-if="storesLoaded" class="loadedContent">
+            <div>
+                <SearchBar :callback="updateStoresDisplay" :stores="stores" />
+                <div v-if="hasSearched">
+                    <StoreList :stores="storesDisplay" />
+                </div>
+                <p v-else>Please type in the search bar to view results</p>
+            </div>
             <!-- <p>{{ storesDisplay }}</p> -->
         </div>
         <p v-else>Please wait while we load our store data</p>
     </div>
 </template>
 
-<style src="../assets/css/reset.css"></style>
+<style src="../assets/css/reset.css">
+
+</style>
+
+<style scoped src="../assets/css/app.css">
+
+</style>
