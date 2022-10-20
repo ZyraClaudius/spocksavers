@@ -24,45 +24,7 @@ export default defineComponent({
 
     data(): DataType {
         return {
-            stores: [
-                {
-                    id: "1",
-                    storeName: "Store 1",
-                    postcode: "PC 1",
-                    phoneNumber: "01326016695"
-                },
-                {
-                    id: "2",
-                    storeName: "Store 2",
-                    postcode: "PC 2",
-                    phoneNumber: "07428016695"
-                },
-                {
-                    id: "3",
-                    storeName: "Store 3",
-                    postcode: "PC 2",
-                    phoneNumber: "07428016695"
-                },
-                {
-                    id: "4",
-                    storeName: "Store 4",
-                    postcode: "PC 1",
-                    phoneNumber: "01326016695"
-                },
-                {
-                    id: "5",
-                    storeName: "Store 5",
-                    postcode: "PC 5",
-                    phoneNumber: "01326016695"
-                },
-                {
-                    id: "6",
-                    storeName: "Store 6",
-                    postcode: "PC 6",
-                    phoneNumber: "01326016695"
-                }
-
-            ],
+            stores: [],
             storesDisplay: [],
             hasSearched: false,
         };
@@ -79,6 +41,12 @@ export default defineComponent({
             this.storesDisplay = stores;
             this.hasSearched = true;
         }
+    },
+
+    async fetch(): Promise<any> {
+      this.stores = await fetch(
+        'https://getstoredata.azurewebsites.net/api/keyreturn'
+      ).then(res => res.json())
     }
 
 })
