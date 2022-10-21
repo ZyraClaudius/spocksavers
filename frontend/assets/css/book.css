@@ -1,0 +1,24 @@
+.booking {
+    border: 3px dashed green;
+    margin: 20px auto;
+    width: 50vw;
+    padding: 20px;
+}
+
+p, input, label, button {
+    margin: 5px auto;
+    display: block;
+}
+
+label {
+    margin-top: 30px;
+    display: block;
+}
+
+p, label {
+    text-align: center;
+}
+
+button {
+    margin-top: 50px;
+}
