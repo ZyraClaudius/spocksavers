@@ -3,6 +3,14 @@ import { defineComponent } from 'vue';
 import Header from './Header.vue';
 import type { Store } from './App.vue';
 import type { PropType } from 'vue';
+import { validate } from '@babel/types';
+type DataType = {
+            bookedID: string
+            userName: string,
+            userEmail: string,
+            dateTime: string,
+            formErrors: string[]
+        }
 
 export default defineComponent({
     props: {
@@ -10,16 +18,46 @@ export default defineComponent({
         goHome: {type: Function as PropType<()=>void>, required:true},
     },
 
-    data() {
+    data():DataType {
         return {
             bookedID: "",
             userName: "",
             userEmail: "",
             dateTime: "",
+            formErrors: []
         };
     },
 
     methods: {
+
+        validateBooking() {
+            this.formErrors = [];
+            if(this.userName=="") {
+                this.formErrors.push("Please fill in name");
+            }
+            
+            if(this.userName.length > 256) {
+                this.formErrors.push("Name cannot be more than 256 characters");
+            }
+
+            if(this.userEmail=="") {
+                this.formErrors.push("Please fill in email");
+
+            }
+
+            if(this.userEmail.length>256) {
+                this.formErrors.push("Email cannot be more than 256 characters");
+            }
+
+            if(!this.dateTime.match(/^\d{4}-\d\d-\d\d \d\d:\d\d:\d\d$/)) {
+                this.formErrors.push("Please enter a date and time in the accepted format");
+            }
+
+            if(this.formErrors.length==0) {
+                this.confirmBooking();
+            }
+        },
+
         async confirmBooking() {
             var myHeaders = new Headers();
             myHeaders.append("Content-Type", "application/json");
@@ -64,15 +102,9 @@ export default defineComponent({
         <input v-model="userEmail" type="datetime" id="email" />
         <label for="time">Date & Time. Please use format YYYY-MM-DD HH:MM:SS</label>
         <input v-model="dateTime" type="datetime" id="time" />
-        <p>{{ dateTime }}</p>
-        <button @click="confirmBooking">Confirm Booking</button>
+        <p v-for="error of formErrors" class="errorMessage">{{ error }}</p>
+        <button @click="validateBooking">Confirm Booking</button>
     </div>
 </template>
 
-<style src="../assets/css/reset.css">
-
-</style>
-
-<style scoped src="../assets/css/app.css">
-
-</style>
+<style scoped src="../assets/css/book.css"></style>
