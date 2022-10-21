@@ -3,6 +3,7 @@ import { defineComponent } from 'vue';
 import SearchBar from './SearchBar.vue';
 import StoreList from './StoreList.vue';
 import Header from './Header.vue';
+import Book from './Book.vue';
 
 export type Store = {
     "id": string;
@@ -17,16 +18,18 @@ type DataType = {
     stores: Store[],
     storesDisplay: Store[]
     hasSearched: boolean
+    selectedStore: Store | undefined
 };
 
 export default defineComponent({
-    components: { SearchBar, StoreList, Header },
+    components: { SearchBar, StoreList, Header, Book },
 
     data(): DataType {
         return {
             stores: [],
             storesDisplay: [],
             hasSearched: false,
+            selectedStore: undefined
         };
     },
 
@@ -40,13 +43,23 @@ export default defineComponent({
         updateStoresDisplay(stores: Store[]) {
             this.storesDisplay = stores;
             this.hasSearched = true;
+        },
+
+        callbackSelectStore(store: Store) {
+            return () => {
+                this.selectedStore = store;
+            };
+        },
+
+        goHome() {
+            this.selectedStore = undefined;
         }
     },
 
     async fetch(): Promise<any> {
-      this.stores = await fetch(
-        'https://getstoredata.azurewebsites.net/api/keyreturn'
-      ).then(res => res.json())
+        this.stores = await fetch(
+            'https://getstoredata.azurewebsites.net/api/keyreturn'
+        ).then(res => res.json())
     }
 
 })
@@ -54,13 +67,16 @@ export default defineComponent({
 </script>
 
 <template>
-    <div>
+
+    <Book v-if="selectedStore" :loc="selectedStore" :goHome="goHome"/>
+
+    <div v-else>
         <Header />
         <div v-if="storesLoaded" class="loadedContent">
             <div>
                 <SearchBar :callback="updateStoresDisplay" :stores="stores" />
                 <div v-if="hasSearched">
-                    <StoreList :stores="storesDisplay" />
+                    <StoreList :stores="storesDisplay" :callbackSelectStore="callbackSelectStore" />
                 </div>
                 <p v-else>Please type in the search bar to view results</p>
             </div>

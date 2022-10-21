@@ -1,9 +1,10 @@
-a{
+button{
     text-decoration: none;
     display: inline-block;
     border: 2px solid black;
     color: black;
     padding: 6px 10px;
+    background-color: white;
     font-size: inherit;
     border-radius: 5px;
 }
@@ -21,7 +22,7 @@ a{
     }
 }
 
-a:hover {
+button:hover {
    background-color: green;
    color: white;
    transform: scale(1.1);

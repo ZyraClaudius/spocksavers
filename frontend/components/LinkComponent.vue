@@ -1,17 +1,18 @@
 <script lang="ts">
 import { defineComponent } from 'vue';
-
+import type {PropType} from 'vue';
 export default defineComponent({
     props: {
-        label: {type: String, default: "Book"},
-        href: {type: String, default: "https://google.com"} 
+        label: { type: String, default: "Book" },
+        selectStore: {type: Function as PropType<()=>void>, required: true}
     }
 })
 </script>
 
 <template>
-    <a :href="$props.href">{{ $props.label }}</a>
+    <button @click="selectStore">{{ $props.label }}</button>
 </template>
 
 <style scoped src="../assets/css/linkComponent.css">
+
 </style>

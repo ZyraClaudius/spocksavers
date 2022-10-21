@@ -4,7 +4,7 @@
         <div class="storeInfo">
             <p>{{ store.postcode }}</p>
             <p>{{ store.phoneNumber }}</p>
-            <LinkComponent />
+            <LinkComponent :selectStore="selectStore"/>
         </div>
     </div>
 </template>
@@ -17,13 +17,14 @@ import LinkComponent from './LinkComponent.vue';
 
 export default defineComponent({
     props: {
-        store: {type: Object as PropType<Store>, required: true}
+        store: { type: Object as PropType<Store>, required: true },
+        selectStore: {type: Function as PropType<()=>void>, required: true}
     },
     data() {
         return {
         }
     },
-    components: {LinkComponent}
+    components: { LinkComponent }
 })
 </script>
 
