@@ -11,6 +11,7 @@ type Store = {
 
 const httpTrigger: AzureFunction = function (context: Context, req: HttpRequest) {
     let result: Store[] = [];
+    let validRequest: boolean = req.headers.Origin === "localhost:3000" || req.headers.Origin === "https://red-wave-0fd367603.2.azurestaticapps.net/";
 
     // const responseMessage = "Hello World!"
     var Connection = require("tedious").Connection;
@@ -39,6 +40,9 @@ const httpTrigger: AzureFunction = function (context: Context, req: HttpRequest)
                     error: err,
                     user: process.env.Fnuser,
                 },
+                headers: {
+                    'Access-Control-Allow-Origin': validRequest ? req.headers.Origin : 'N/A',
+                }
             };
             context.done();
         }
@@ -56,7 +60,10 @@ const httpTrigger: AzureFunction = function (context: Context, req: HttpRequest)
                 if (err) {
                     context.res = {
                         status: 500,
-                        body: err
+                        body: err,
+                        headers: {
+                            'Access-Control-Allow-Origin': validRequest ? req.headers.Origin : 'N/A',
+                        }
                     };
                     context.done();
                 }
@@ -87,6 +94,9 @@ const httpTrigger: AzureFunction = function (context: Context, req: HttpRequest)
             context.res = {
                 status: 200 /* Defaults to 200 */,
                 body: result,
+                headers: {
+                    'Access-Control-Allow-Origin': validRequest ? req.headers.Origin : 'N/A',
+                }
             };
             context.done()
             return;
