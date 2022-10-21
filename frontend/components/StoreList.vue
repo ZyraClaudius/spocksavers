@@ -6,7 +6,8 @@ import StoreTile from './StoreTile.vue';
 
 export default defineComponent({
     props: {
-        stores: { type: Array as PropType<Store[]>, required: true }
+        stores: { type: Array as PropType<Store[]>, required: true },
+        callbackSelectStore: {type: Function as PropType<(store: Store) => (() => void)>, required: true}
     },
     data() {
         return {};
@@ -18,7 +19,7 @@ export default defineComponent({
 <template>
     <div class="storeListContainer">
         <div v-if="stores.length > 0" class="storeList">
-            <StoreTile v-for="store of $props.stores" :store="store" :key="store.id" />
+            <StoreTile v-for="store of $props.stores" :store="store" :key="store.id" :selectStore="callbackSelectStore(store)"/>
             <!-- <p>{{ $props.stores }}</p> -->
         </div>
         <p v-else>Sorry, no results</p>
