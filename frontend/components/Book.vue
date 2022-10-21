@@ -109,7 +109,7 @@ export default defineComponent({
         <label for="time">Date & Time. Please use format YYYY-MM-DD HH:MM:SS</label>
         <input v-model="dateTime" type="datetime" id="time" />
         <p v-for="error of formErrors" class="errorMessage">{{ error }}</p>
-        <LinkComponent :select-store="confirmBooking" label="Confirm Booking" />
+        <LinkComponent :select-store="validateBooking" label="Confirm Booking" />
         </div>
     </div>
 </template>
