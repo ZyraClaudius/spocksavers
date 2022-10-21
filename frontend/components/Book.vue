@@ -12,10 +12,13 @@ type DataType = {
             formErrors: string[]
         }
 
+import LinkComponent from '../components/LinkComponent.vue';
+
+
 export default defineComponent({
     props: {
         loc: { type: Object as PropType<Store>, required: true },
-        goHome: {type: Function as PropType<()=>void>, required:true},
+        goHome: { type: Function as PropType<() => void>, required: true },
     },
 
     data():DataType {
@@ -81,21 +84,24 @@ export default defineComponent({
         }
     },
 
+    components: {LinkComponent}
+
 })
 
 </script>
 
 <template>
-    <div v-if="bookedID">
-        <p>Your booking is confirmed</p>
-        <p>Your booking ID is {{ bookedID }}</p>
-        <p>Please make a note of this for future reference</p>
-        <p>Click below or refresh the page to return to home</p>
-        <button @click="$props.goHome">Home</button>
-    </div>
-    <div v-else>
+    <div>
         <Header />
-        <p>Please complete the below to confirm your booking at {{ $props.loc.storeName }}</p>
+        <div v-if="bookedID" class="booking">
+            <p>Your booking is confirmed</p>
+            <p>Your booking ID is {{ bookedID }}</p>
+            <p>Please make a note of this for future reference</p>
+            <p>Click below or refresh the page to return to home</p>
+            <LinkComponent :select-store="goHome" label="Home"/>
+        </div>
+        <div v-else class="booking">
+            <p>Please complete the below to confirm your booking at {{ $props.loc.storeName }}</p>
         <label for="name">Your Name</label>
         <input v-model="userName" type="text" id="name" />
         <label for="email">Your Email</label>
@@ -103,8 +109,11 @@ export default defineComponent({
         <label for="time">Date & Time. Please use format YYYY-MM-DD HH:MM:SS</label>
         <input v-model="dateTime" type="datetime" id="time" />
         <p v-for="error of formErrors" class="errorMessage">{{ error }}</p>
-        <button @click="validateBooking">Confirm Booking</button>
+        <LinkComponent :select-store="confirmBooking" label="Confirm Booking" />
+        </div>
     </div>
 </template>
 
-<style scoped src="../assets/css/book.css"></style>
+<style scoped src="../assets/css/book.css">
+
+</style>
